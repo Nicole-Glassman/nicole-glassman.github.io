@@ -703,7 +703,7 @@ const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-(function(){ const sc=document.querySelector(".nav nav"), w=sc&&sc.parentElement; if(sc){ const upd=()=>{ if(sc.scrollLeft+sc.clientWidth<sc.scrollWidth-2) w.setAttribute("data-more",""); else w.removeAttribute("data-more"); }; sc.addEventListener("scroll",upd,{passive:true}); addEventListener("resize",upd); upd(); } })();
+(function(){ const sc=document.querySelector(".nav nav"), w=sc&&sc.parentElement; if(sc){ const upd=()=>{ if(sc.scrollLeft+sc.clientWidth<sc.scrollWidth-2) w.setAttribute("data-more",""); else w.removeAttribute("data-more"); }; sc.addEventListener("scroll",upd,{passive:true}); addEventListener("resize",upd); if(document.fonts){ document.fonts.ready.then(upd); document.fonts.addEventListener("loadingdone",upd); } upd(); } })();
 (function(){ const btn=$('#menu-btn'), list=$('#section-nav'); if(!btn||!list) return;
   const set=open=>{ btn.setAttribute('aria-expanded',String(open)); list.classList.toggle('open',open); };
   btn.addEventListener('click',()=>set(btn.getAttribute('aria-expanded')!=='true'));
